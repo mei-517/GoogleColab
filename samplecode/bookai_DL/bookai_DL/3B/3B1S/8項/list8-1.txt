@@ -1,0 +1,3 @@
+!apt update
+!apt install xvfb   # 仮想ディスプレイ上に描画する
+!pip install pyvirtualdisplay   # Google Colab上でXvfbを動かす

@@ -1,0 +1,9 @@
+arparams = np.r_[1, -.75, .25]
+maparams = np.r_[1, .65, .35]
+ya = arma_generate_sample(ar=arparams, ma=maparams, nsample=200,burnin=100)
+yb = ya
+y = pd.Series(yb)
+
+fig, ax = plt.subplots(figsize=(5,4))
+fig2 = plt.plot(yb)
+plt.show()

@@ -1,0 +1,7 @@
+p = 2
+q = 1
+D = 2
+P = 2
+Q = 1
+result = SARIMAX(y, order=(p,d,q), seasonal_order=(P,D,Q,31), trend='n').fit()
+print(result.aic)

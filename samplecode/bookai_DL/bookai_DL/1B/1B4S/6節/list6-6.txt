@@ -1,0 +1,4 @@
+p = 2
+q = 1
+result = SARIMAX(y, order=(p,0,q), trend='n').fit()
+print(result.aic)

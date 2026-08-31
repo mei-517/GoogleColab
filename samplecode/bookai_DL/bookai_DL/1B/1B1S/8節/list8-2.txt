@@ -1,0 +1,11 @@
+!pip install japanize-matplotlib
+import matplotlib.pyplot as plt
+import japanize_matplotlib
+
+# ‚‚³‚Æ•‚ÌU•z}‚ğ•`‰æ
+plt.scatter(biscuit['‚‚³'], biscuit['•'])
+
+# x²‚Æy²‚Ìƒ‰ƒxƒ‹‚ğİ’è
+plt.xlabel('‚‚³')
+plt.ylabel('•')
+plt.show()

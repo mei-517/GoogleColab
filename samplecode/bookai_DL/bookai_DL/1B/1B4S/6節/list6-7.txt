@@ -1,0 +1,12 @@
+min_aic = 10000
+min_p = min_q = -1
+for p in range(5):
+    for q in range(4):
+        result = SARIMAX(y, order=(p,0,q), trend='n').fit()
+        print(p, q, result.aic)
+        if min_aic > result.aic:
+            min_aic = result.aic
+            min_p = p
+            min_q = q
+print('-----')
+print(min_p, min_q, min_aic)

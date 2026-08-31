@@ -1,0 +1,15 @@
+# PCAの読み込み
+from sklearn.decomposition import PCA
+
+# 主成分を累積寄与率80％まで抽出
+pca = PCA(0.80)
+pixels_pca = pca.fit_transform(pixels_set)
+
+# 主成分数を確認
+print(pca.n_components_)
+
+# 次元圧縮したデータセットのサイズを確認
+print(pixels_pca.shape)
+
+# 寄与率
+pca.explained_variance_ratio_

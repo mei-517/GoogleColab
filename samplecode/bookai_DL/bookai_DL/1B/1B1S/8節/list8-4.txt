@@ -1,0 +1,15 @@
+import numpy as np
+
+# グループIDのユニーク値を取得
+group_uniq = np.unique(group)
+
+# 散布図のデータ点をグループごとに描画
+for g in group_uniq:
+  tmp = biscuit[biscuit['グループ']==g]
+  plt.scatter(tmp['高さ'], tmp['幅'], label=g)
+
+# 凡例、x軸とy軸のラベルを設定
+plt.legend()
+plt.xlabel('高さ')
+plt.ylabel('幅')
+plt.show()

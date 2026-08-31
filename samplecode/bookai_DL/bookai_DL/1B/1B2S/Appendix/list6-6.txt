@@ -1,0 +1,4 @@
+pixels_set = pd.concat([pixels_shiba, pixels_samo])
+
+print(pixels_set.shape)
+pixels_set.head()

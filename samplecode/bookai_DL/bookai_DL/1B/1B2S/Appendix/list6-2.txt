@@ -1,0 +1,23 @@
+import os
+import cv2
+import pandas as pd
+import numpy as np
+
+# ファイルの取得
+files = os.listdir('/content/drive/My Drive/Colab Notebooks/data/cv/shiba_inu/')
+pixels_shiba = []
+
+for f in files:
+  # 画像をカラーで読み込み
+  img = cv2.imread('/content/drive/My Drive/Colab Notebooks/data/cv/shiba_inu/' + f)
+
+  # 画像をリサイズ
+  img = cv2.resize(img, (128, 128))
+  # ピクセル配列をB、G、Rごとに分割…①
+  b, g, r = cv2.split(img)        
+  # ピクセル値の格納
+  b = np.array(b).flatten().tolist()
+  g = np.array(g).flatten().tolist()
+  r = np.array(r).flatten().tolist()
+  tmp = b + g + r
+  pixels_shiba.append(tmp)

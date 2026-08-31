@@ -1,0 +1,12 @@
+import cv2
+import matplotlib.pyplot as plt
+
+# 画像を読み込み
+img = cv2.imread('/content/drive/My Drive/Colab Notebooks/data/cv/shiba_inu/shiba_inu_34.jpg')
+
+# 画像のサイズの確認
+print(img.shape)
+
+# 画像ファイルの表示
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.show()

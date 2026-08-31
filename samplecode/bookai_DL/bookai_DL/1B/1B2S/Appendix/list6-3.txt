@@ -1,0 +1,6 @@
+# ピクセル値をデータフレーム形式へ変換
+pixels_shiba = pd.DataFrame(pixels_shiba)
+pixels_shiba = pixels_shiba/255 # 正規化
+
+print(pixels_shiba.shape)
+pixels_shiba.head()

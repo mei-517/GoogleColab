@@ -1,0 +1,9 @@
+train: /content/drive/MyDrive/YOLO/MyData/penguin/
+val: /content/drive/MyDrive/YOLO/MyData/penguin/
+test: /content/drive/MyDrive/YOLO/MyData/penguin/
+
+# number of classes
+nc: 1
+
+# class names
+names: ['penguin']

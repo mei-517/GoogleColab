@@ -1,0 +1,38 @@
+from IPython import display
+from pyvirtualdisplay import Display
+import matplotlib.pyplot as plt
+from matplotlib import animation
+
+# 仮想ディスプレイの準備
+d = Display()
+d.start()
+
+obs = env.reset()       # 環境を初期化
+total_reward = 0.0      # 報酬を初期化
+img = []                # 静止画の格納リストを初期化
+
+# 行動開始
+for t in range(200):
+  current_state = digitize_state(obs)         # 環境変数の離散化
+  action = np.argmax(q_func[current_state])   # Q値が最大の行動
+
+  obs, reward, done, info = env.step(action)  # 1ステップ実行
+  total_reward += reward                      # 報酬を加算
+
+  display.clear_output(wait=True)
+  img.append(env.render('rgb_array'))         # 行動を静止画で格納
+
+  # 行動終了
+  if done:
+    print("Finished {} steps {} rewards".format(t+1, total_reward))
+    break
+
+dpi = 72                # 解像度の設定
+plt.figure(figsize=(img[0].shape[1]/dpi, img[0].shape[0]/dpi), dpi=dpi)
+patch = plt.imshow(img[0])
+plt.axis=('off')
+
+animate = lambda i: patch.set_data(img[i]) 
+# 静止画を50msごとに描画
+ani = animation.FuncAnimation(plt.gcf(), animate, frames=len(img), interval=50)
+display.display(display.HTML(ani.to_jshtml()))

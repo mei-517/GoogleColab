@@ -1,0 +1,2 @@
+# クラスタ0の統計量を確認
+biscuit[biscuit['グループ']==0].drop('グループ', axis=1).describe()

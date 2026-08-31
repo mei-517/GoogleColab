@@ -1,0 +1,11 @@
+import pandas as pd
+
+# データセットの読み込み
+biscuit = pd.read_csv('/content/biscuit.csv', sep=',')
+# 項目IDにID属性を付与
+biscuit = biscuit.set_index('ID')
+
+# データセットのサイズ（行・列）を確認
+print(biscuit.shape)
+# データセットの先頭5行を表示
+biscuit.head()

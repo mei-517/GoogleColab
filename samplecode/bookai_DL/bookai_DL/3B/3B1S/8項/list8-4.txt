@@ -1,0 +1,4 @@
+q_func = np.zeros((num_bins**num_states, num_actions))  # Qテーブルの作成
+ 
+print(q_func.shape)     # Qテーブルのサイズ
+print(q_func)           # Qテーブルの初期値

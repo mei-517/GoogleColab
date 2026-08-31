@@ -1,0 +1,29 @@
+# グループ0と1のときの高さを抽出
+g0 = biscuit[biscuit['グループ'] == 0]
+g1 = biscuit[biscuit['グループ'] == 1]
+
+# 高さのデータをまとめる
+g_height = [g0['高さ'], g1['高さ']]
+# 幅のデータをまとめる
+g_width = [g0['幅'], g1['幅']]
+
+plt.figure(figsize=(12, 4))
+plt.subplot(1,2,1)
+
+# 箱ひげ図の描画
+plt.boxplot(g_height)
+# x軸（横軸）とy軸（縦軸）のラベルを追加
+plt.xlabel('グループ')
+plt.ylabel('高さ')
+ax = plt.gca()
+# y軸（縦軸）のラベルを追加
+plt.setp(ax, xticklabels = [0, 1])
+plt.subplot(1,2,2)
+plt.boxplot(g_width)
+plt.xlabel('グループ')
+plt.ylabel('幅')
+ax = plt.gca()
+plt.setp(ax, xticklabels = [0, 1])
+
+plt.subplots_adjust(wspace=0.4)
+plt.show()

@@ -1,0 +1,20 @@
+pixels_pca = pd.DataFrame(pixels_pca)
+img_group = pd.DataFrame(img_group).rename(columns={0:'label'})
+
+# 第1、第2主成分を取り出す
+pixels_pca_label = pd.concat([pixels_pca, img_group], axis=1)
+pixels_pca_label = pixels_pca_label[[0, 1, 'label']]
+
+# グループ0の描画
+pixels_pca_0 = pixels_pca_label[pixels_pca_label['label']==0]
+plt.scatter(pixels_pca_0[0], pixels_pca_0[1], c='red', label=0)
+
+# グループ1の描画
+pixels_pca_1 = pixels_pca_label[pixels_pca_label['label']==1]
+plt.scatter(pixels_pca_1[0], pixels_pca_1[1], c='blue', label=1)
+
+plt.xlabel('1st-comp')
+plt.ylabel('2nd-comp')
+plt.legend()
+plt.grid()
+plt.show()

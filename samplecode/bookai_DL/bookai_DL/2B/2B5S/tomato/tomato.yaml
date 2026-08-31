@@ -1,0 +1,10 @@
+#dirs
+train: /content/drive/MyDrive/YOLO/MyData/tomato
+val: /content/drive/MyDrive/YOLO/MyData/tomato
+test: /content/drive/MyDrive/YOLO/MyData/tomato
+
+# number of classes
+nc: 1
+
+# class names
+names: ['tomato']

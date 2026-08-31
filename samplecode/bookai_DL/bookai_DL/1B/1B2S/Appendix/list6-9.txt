@@ -1,0 +1,3 @@
+km = KMeans(n_clusters=2, init="k-means++", n_init=10, max_iter=300, random_state=0)
+img_group = km.fit_predict(pixels_pca)
+print(img_group)

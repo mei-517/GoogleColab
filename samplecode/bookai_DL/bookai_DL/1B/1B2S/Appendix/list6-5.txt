@@ -1,0 +1,6 @@
+# ピクセル値をデータフレーム形式へ変換
+pixels_samo = pd.DataFrame(pixels_samo)
+pixels_samo = pixels_samo/255 # 正規化
+
+print(pixels_samo.shape)
+pixels_samo.head()
