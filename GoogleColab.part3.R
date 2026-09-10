@@ -20,7 +20,7 @@ min_max <- function(x1,x2){
   
   result <- sweep(x1, 1, min_val, "-")
   result <- sweep(result, 1, max_val - min_val, "/")
-  return(result)
+  return(t(result))
 }
 
 
@@ -35,6 +35,8 @@ yd <- d[,ncol(d)]
 # head(Xd)
 # head(yd)
 
+
+## 図をかく
 draw_graph <- function(){
   ## マーカー
   markers <- c(1, 4, 2, 6, 5, 8, 3, 18)
@@ -50,6 +52,8 @@ draw_graph <- function(){
   }
 }
 
+
+## 図を保存
 png("img1.png")
 draw_graph()
 dev.off()
@@ -57,3 +61,30 @@ dev.off()
 pdf("img1.pdf")
 draw_graph()
 dev.off()
+
+
+## 学習用とテスト用に分ける
+set.seed(5)
+
+train_index <- sample(1:nrow(xd), size = 0.8*nrow(xd))
+
+x_train <- xd[train_index, ]
+x_test <- xd[-train_index, ]
+y_train <- yd[train_index]
+y_test <- yd[-train_index]
+
+
+## 正規化
+x <- min_max(x_train, x_train)
+y <- y_train
+
+## SVMによる学習
+model <- svm(x =x, y = as.factor(y))
+
+## 学習データを予測
+y_pred <- predict(model, x)
+
+## 正解率
+mean(y_pred == y)
+
+## 
