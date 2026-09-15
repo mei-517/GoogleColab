@@ -235,4 +235,140 @@ dev.off()
 
 
 
-## 
+## random_plot.ipynb ###########################################################
+
+## 乱数を固定
+set.seed(0)
+
+## dataを用意
+n <- 50
+
+## x1,y1を用意
+x1 <- matrix(runif(n * 2, min = -1, max = 1), nrow = n, ncol = 2)
+y1 <- rep(0, n)
+
+## x2,y2を用意
+x2 <- matrix(runif(n * 2, min = -1, max = 1), nrow = n, ncol = 2)
+y2 <- rep(1, n)
+
+## xd,ydに結合する
+xd <- rbind(x1, x2)
+yd <- c(y1, y2)
+
+
+## 引数の用意
+
+## x,yに代入
+x <- Xd
+y <- yd
+
+## SVM
+clf <- svm(x, y, type = "C-classification", kernel = "radial", cost = 100.0, gamma = 20.0)
+
+## 予測
+y_pred <- predict(clf, x)
+
+## 正解率
+mean(y_pred == y)
+
+## img #####
+draw_graph <- function(x, y, clf){
+  
+  ## Xの範囲
+  x_min <- min(x[, 1])
+  x_max <- max(x[, 1])
+  y_min <- min(x[, 2])
+  y_max <- max(x[, 2])
+  
+  ## 格子を作る
+  x_seq <- seq(x_min, x_max, length.out = 200)
+  y_seq <- seq(y_min, y_max, length.out = 200)
+  grid <- expand.grid(x = x_seq, y = y_seq)
+  
+  ## 格子上の各点をSVMで予測
+  z <- predict(clf, grid)
+  z <- as.numeric(as.character(z))
+  
+  ## 予測結果を格子状に戻す
+  z <- matrix(z, nrow = length(x_seq), ncol = length(y_seq))
+  z <- t(z)
+  
+  ## 背景を描く
+  image(x_seq, y_seq, z, col = c("lightblue", "lightpink"), xlim = c(x_min, x_max), ylim = c(y_min, y_max), xlab = "", ylab = "", axes = FALSE)
+  
+  ## 決定境界
+  contour(x_seq, y_seq, z, add = TRUE, drawlabels = FALSE)
+  
+  ## 元のデータを描く
+  points(x[y == 0, 1], x[y == 0, 2], pch = 16, col = "red")
+  points(x[y == 1, 1], x[y == 1, 2], pch = 4, col = "blue")
+}
+
+
+## グラフをかく１
+draw_graph(x, y, clf)
+
+png("img.png")
+draw_graph(x, y, clf)
+dev.off()
+
+pdf("img.pdf")
+draw_graph(x, y, clf)
+dev.off()
+
+
+## train用とtest用に分ける
+set.seed(5)
+train_idx <- sample(1:nrow(Xd), size = 0.8 * nrow(Xd))
+
+x_train <- xd[train_idx, ]
+x_test  <- xd[-train_idx, ]
+y_train <- yd[train_idx]
+y_test  <- yd[-train_idx]
+
+
+## trainデータでSVMを学習
+x <- x_train
+y <- y_train
+clf <- svm(x, y, type = "C-classification", kernel = "radial", cost = 100.0, gamma = 20.0)
+
+## trainデータで予測
+y_pred <- predict(clf, x_train)
+mean(y_pred == y_train)
+
+## testデータで予測
+y_pred <- predict(clf, x_test)
+mean(y_pred == y_test)
+
+
+
+## グラフをかく2
+draw_graph(x, y, clf)
+
+png("img2.png")
+draw_graph(x, y, clf)
+dev.off()
+
+pdf("img2.pdf")
+draw_graph(x, y, clf)
+dev.off()
+
+
+
+##   #############################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
