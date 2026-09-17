@@ -255,20 +255,17 @@ y2 <- rep(1, n)
 xd <- rbind(x1, x2)
 yd <- c(y1, y2)
 
-
-## 引数の用意
-
-## x,yに代入
-x <- Xd
+## x,yに代入(引数の用意)
+x <- xd
 y <- yd
 
-## SVM
+## 学習1
 clf <- svm(x, y, type = "C-classification", kernel = "radial", cost = 100.0, gamma = 20.0)
 
-## 予測
+## 予測1
 y_pred <- predict(clf, x)
 
-## 正解率
+## 正解率1
 mean(y_pred == y)
 
 ## img #####
@@ -305,7 +302,7 @@ draw_graph <- function(x, y, clf){
 }
 
 
-## グラフをかく１
+## 散布図１
 draw_graph(x, y, clf)
 
 png("img.png")
@@ -319,7 +316,7 @@ dev.off()
 
 ## train用とtest用に分ける
 set.seed(5)
-train_idx <- sample(1:nrow(Xd), size = 0.8 * nrow(Xd))
+train_idx <- sample(1:nrow(xd), size = 0.8 * nrow(xd))
 
 x_train <- xd[train_idx, ]
 x_test  <- xd[-train_idx, ]
@@ -332,17 +329,16 @@ x <- x_train
 y <- y_train
 clf <- svm(x, y, type = "C-classification", kernel = "radial", cost = 100.0, gamma = 20.0)
 
-## trainデータで予測
+## trainデータで予測・正解率
 y_pred <- predict(clf, x_train)
 mean(y_pred == y_train)
 
-## testデータで予測
+## testデータで予測・正解率
 y_pred <- predict(clf, x_test)
 mean(y_pred == y_test)
 
 
-
-## グラフをかく2
+## 散布図２
 draw_graph(x, y, clf)
 
 png("img2.png")
